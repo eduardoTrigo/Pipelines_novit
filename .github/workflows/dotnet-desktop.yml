@@ -1,0 +1,52 @@
+# nombre del pipeline
+name: GH-send-email-DEV
+
+# eventos disparadores 
+on:
+  push:
+    branches: [ "main" ] # eventos disparadores en branch main
+
+jobs:
+  build:
+
+    runs-on: ubuntu-24.04 # siempre explicitar la version del Sistema Operativo
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: Setup .NET
+      uses: actions/setup-dotnet@v4
+      with:
+         dotnet-version: | # 8.0.x son versiones LTS
+            8.0.x  
+            9.0.x
+    - name: Restore dependencies
+      run: dotnet restore
+    - name: Build
+      run: dotnet build --no-restore
+    - name: Test
+      run: dotnet test --no-build --verbosity normal
+    # Envio de email
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v6      
+      with:                
+        # Required mail server address if not connection_url:
+        server_address: ${{ secrets.EMAIL_HOST }}
+        # Server port, default 25:
+        server_port: ${{ secrets.EMAIL_PORT }}
+        # Optional whether this connection use TLS (default is true if server_port is 465)
+        secure: true
+        # Optional (recommended) mail server username:
+        username: ${{secrets.EMAIL_USERNAME}}
+        # Optional (recommended) mail server password:
+        password: ${{secrets.EMAIL_PASSWORD}}
+        # Required mail subject:
+        subject: Test Github Actions Send Email
+        # Required recipients' addresses:
+        to: jonathan.velazquez@novit.com.ar
+        # Required sender full name (address can be skipped):
+        from: Jonathan Velazquez
+        # Optional plain body:
+        body: Build job of ${{github.repository}} completed successfully!       
+        
+        
+ 
