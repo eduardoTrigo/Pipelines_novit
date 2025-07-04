@@ -27,4 +27,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PASSWORD }}          
           port: ${{ secrets.SERVER_PORT }}
-          script: cd pipelines && dotnet build && dotnet publish -c Release -o ./publish
+          script: cd pipelines && dotnet build && cd Aplicacion && dotnet publish -c Release -o ./publish
