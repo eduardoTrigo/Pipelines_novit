@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PASSWORD }}          
           port: ${{ secrets.SERVER_PORT }}
-          script: rmdir -r pipelines && git clone https://github.com/novitsoftware/pipelines
+          script: cd pipelines && git pull
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
         with:
@@ -27,4 +27,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PASSWORD }}          
           port: ${{ secrets.SERVER_PORT }}
-          script: cd pipelines && dotnet build && cd Aplicacion && dotnet publish -c Release -o ./publish
+          script: dotnet build && cd Aplicacion && dotnet publish -c Release -o ./publish
