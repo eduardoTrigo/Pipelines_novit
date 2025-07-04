@@ -19,7 +19,7 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PASSWORD }}          
           port: ${{ secrets.SERVER_PORT }}
-          script: rmdir -R pipelines && git clone https://github.com/novitsoftware/pipelines
+          script: rmdir -r pipelines && git clone https://github.com/novitsoftware/pipelines
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
         with:
