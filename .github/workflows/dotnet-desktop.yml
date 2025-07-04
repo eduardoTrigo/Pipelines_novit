@@ -32,9 +32,7 @@ jobs:
         # Required mail server address if not connection_url:
         server_address: ${{ secrets.EMAIL_HOST }}
         # Server port, default 25:
-        server_port: ${{ secrets.EMAIL_PORT }}
-        # Optional whether this connection use TLS (default is true if server_port is 465)
-        secure: true
+        server_port: ${{ secrets.EMAIL_PORT }}        
         # Optional (recommended) mail server username:
         username: ${{secrets.EMAIL_USERNAME}}
         # Optional (recommended) mail server password:
