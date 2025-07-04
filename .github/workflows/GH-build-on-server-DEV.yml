@@ -11,7 +11,7 @@ jobs:
 
     runs-on: ubuntu-24.04 # siempre explicitar la version del Sistema Operativo
 
-    steps:
+    steps:    
       - name: Execute remote SSH commands using password
         uses: appleboy/ssh-action@v1
         with:
@@ -19,12 +19,4 @@ jobs:
           username: ${{ secrets.SERVER_USERNAME }}
           key: ${{ secrets.SERVER_PASSWORD }}          
           port: ${{ secrets.SERVER_PORT }}
-          script: cd pipelines && git pull
-      - name: Execute remote SSH commands using password
-        uses: appleboy/ssh-action@v1
-        with:
-          host: ${{ secrets.SERVER_URL }}
-          username: ${{ secrets.SERVER_USERNAME }}
-          key: ${{ secrets.SERVER_PASSWORD }}          
-          port: ${{ secrets.SERVER_PORT }}
-          script: dotnet build && cd Aplicacion && dotnet publish -c Release -o ./publish
+          script: cd pipelines && dotnet build && cd Aplicacion && dotnet publish -c Release -o ./publish
