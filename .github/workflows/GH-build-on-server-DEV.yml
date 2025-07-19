@@ -9,7 +9,7 @@ on:
 jobs:
   build:
 
-    runs-on: ubuntu-24.04 # siempre explicitar la version del Sistema Operativo
+    runs-on: ubuntu-24.04 # siempre explicitar la version del Sistema Operati
 
     steps:    
       - name: Execute remote SSH commands using password
